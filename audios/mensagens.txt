@@ -1,0 +1,4 @@
+1 - "Eu quero comer"
+2 - "Eu quero dormir"
+3 - "Eu quero ir ao banheiro"
+4 - "Eu estou com dor"
