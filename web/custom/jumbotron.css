@@ -1,0 +1,28 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 2rem;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #F1E9E3;
+    font-size: 20px;
+}
+
+.botoes {
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+h1 {
+    color: #DC4712;
+}
+
+.botao {
+    background-color: #EE712B;
+    font-weight: bold;
+}
+
+.botao:hover { 
+    background-color: #DC4712;
+}
