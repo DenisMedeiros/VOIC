@@ -1,0 +1,49 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://v4-alpha.getbootstrap.com/examples/jumbotron/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="icon" href="{% static "/img/icone.png" %}">
+
+    <title>VOIC - {% block "titulo" %} {% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static "/css/jumbotron.css" %}" rel="stylesheet">
+        
+    {% block "css" %}{% endblock %}
+    
+  </head>
+
+  <body>
+  
+    {% block "corpo" %}
+    {% endblock %}
+
+      <hr>
+    
+      <footer>
+        <p class="text-center">© VOIC 2017 - Autores: Denis, Eulle, Jéssica e Rayane</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="{% static "/js/jquery-3.1.1.js" %}"></script>
+    <script src="{% static "/js/tether.min.js" %}"></script>
+    <script src="{% static "/js/bootstrap.min.js" %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static "/js/ie10-viewport-bug-workaround.js" %}"></script>
+    
+    {% block "js" %}{% endblock %}
+  
+
+</body><object id="7aa8b808-5939-87a2-1b7a-a8a4d9ac9c85" width="0" height="0" type="application/gas-events-bb"></object></html>

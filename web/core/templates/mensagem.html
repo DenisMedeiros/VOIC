@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block "titulo" %} Cadastro {% endblock %}
+
+{% block "corpo" %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">          
+        <h1 class="display-3 text-center"> Cadastro realizado com sucesso! </h1>
+        <p class="text-center"> Você será redirecionando em 5 segundos...</p>
+        
+      </div>  
+    </div>
+
+    <br><br>
+{% endblock %}
+
+{% block "js" %}
+<script>
+    // Your application has indicated there's an error
+    window.setTimeout(function(){
+        // Move to a new location or you can do something else
+        
+        window.location.href = "{% url "pagina_inicial" %}";
+
+    }, 5000);
+</script>    
+{% endblock %}

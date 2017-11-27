@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block "titulo" %} Pagina Inicial {% endblock %}
+
+{% block "corpo" %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3 text-center">Bem-Vindo ao V<img src="{% static "/img/icone.png" %}" height="60px" />IC!</h1>
+    <p class="text-center">Aqui você pode configurar o VOIC, podendo cadastrar, editar ou excluir dados da criança e do responsável, bem como ver o histório de uso.</p>
+    
+    <br />
+    <br />
+    
+    <div class="container botoes">
+      <div class="row">
+        {% if not existe %}
+        <div class="col-md-12">
+          <p class="text-center"><a class="btn btn-success botao" href="{% url "cadastro" %}" role="button">Cadastrar »</a></p>
+          <p class="text-center"> Aqui você deve cadastrar os dados da criança e do responsável. </p>
+        </div>
+        {% else %}
+        <div class="col-md-4">
+          <p class="text-center"><a class="btn btn-success botao" href="{% url "edicao" %}" role="button">Editar Cadastro »</a></p>
+          <p> Aqui você pode editar os dados da criança e do responsável. </p>
+        </div>          
+        <div class="col-md-4">
+          <p class="text-center"><a class="btn btn-success botao" href="{% url "exclusao" %}" role="button">Excluir Cadastro »</a></p>
+          <p> Aqui você pode excluir os dados da criança e do responsável. </p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-center"><a class="btn btn-success botao" href="{% url "historico" %}" role="button">Histórico de Uso »</a></p>
+          <p> Aqui você pode ver os dados de uso do VOIC pela criança. </p>
+        </div>
+        {% endif %}
+      </div>
+                
+
+  </div>
+</div>
+
+{% endblock %}
+
