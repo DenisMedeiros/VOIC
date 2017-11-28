@@ -14,6 +14,10 @@ from .models import *
 class PaginaInicialView(View):
 
     def get(self, request):
+    
+        sistema = Sistema.objects.last()
+        if not sistema:
+            sistema = Sistema.objects.create()
         
         if Crianca.objects.all().count() == 0:
             existe = False
@@ -22,6 +26,7 @@ class PaginaInicialView(View):
         
         context = {
             'existe': existe,
+            'sistema': sistema,
         }
         return render(request, 'pagina_inicial.html', context)
         
@@ -172,3 +177,17 @@ def registrar_acao(request):
     
     return JsonResponse({})   
    
+def gerar_notificacao(request):
+
+    sistema = Sistema.objects.last()
+    if not sistema:
+        sistema = Sistema.objects.create()
+    estado = request.GET['estado']
+    
+    if estado == u'true':
+        sistema.gerar_notificacao = True
+    else:
+        sistema.gerar_notificacao = False
+    
+    sistema.save()
+    return JsonResponse({})   

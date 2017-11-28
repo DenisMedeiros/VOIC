@@ -3,6 +3,10 @@
 
 {% block "titulo" %} Pagina Inicial {% endblock %}
 
+{% block "css" %}
+    <link href="{% static "/css/bootstrap-switch.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block "corpo" %}
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -36,10 +40,43 @@
         </div>
         {% endif %}
       </div>
-                
-
+   
   </div>
 </div>
 
+<div class="botoes text-center">
+    <p> Gerar Notificações? </p>
+    <input type="checkbox" name="gerar_notificacao" checked>
+</div>
+
+{% endblock %}
+
+{% block "js" %}
+<script src="{% static "/js/bootstrap-switch.min.js" %}"></script>
+<script>
+
+function alterarGeracaoNotificacao(event, state) {
+    $.get("{% url "gerar_notificacao" %}", {"estado": state});
+}
+
+$( document ).ready(function()
+{ 
+
+    $("[name='gerar_notificacao']").bootstrapSwitch({
+        'size': 'large',
+        'onText': 'Sim',
+        'offText': 'Não',
+        'onSwitchChange': alterarGeracaoNotificacao
+        
+    });
+    
+    {% if sistema.gerar_notificacao %}
+    $('input[name="gerar_notificacao"]').bootstrapSwitch('state', true, true);
+    {% else %}
+    $('input[name="gerar_notificacao"]').bootstrapSwitch('state', false, true);
+    {% endif %}
+
+});
+</script>
 {% endblock %}
 

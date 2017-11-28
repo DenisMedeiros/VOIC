@@ -24,6 +24,10 @@ while True:
     r,w,x = select([dev], [], [])
     for event in dev.read():
         if event.type==1 and event.value==1:
+            print "Letra:", KEYS[event.code]
+            print "Event code:", event.code
+            continue
+        
             diferenca = datetime.now() - ultima_acao
             if diferenca.seconds >= INTERVALO:
                 r = requests.get('http://10.9.99.44:8000/sexo_crianca/')
@@ -37,8 +41,8 @@ while True:
                     subprocess.Popen(['omxplayer', os.path.join(DIRETORIO_AUDIOS, 'cadastro.mp3')])
                     continue
                     
-                letra = KEYS[event.code]
-                if letra == 'a':
+                code = event.code
+                if code i in [1,41,59]
                     subprocess.Popen(['omxplayer', os.path.join(DIRETORIO_AUDIOS, sexo, 'comer.mp3')])
                     r = requests.get(URL_SALVAR_ACAO, params={'data_hora': ultima_acao, 'acao': 0, 'gerou_notificacao': 0})
                 elif letra == 'b':

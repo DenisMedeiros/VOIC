@@ -33,6 +33,9 @@ class Historico(models.Model):
     data_hora = models.DateTimeField(auto_now=True, null=False, blank=False)
     gerou_notificacao = models.BooleanField(null=False, blank=False)
     
+class Sistema(models.Model):
+    gerar_notificacao = models.BooleanField(null=False, blank=False, default=False)  
+    
 # Forms
 
 class CriancaForm(ModelForm):

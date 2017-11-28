@@ -29,5 +29,6 @@ urlpatterns = [
     url('^historico/$', views.HistoricoView.as_view(), name='historico'),
     
     url('^sexo_crianca/$', views.get_sexo_crianca, name='sexo'),
-    url('^registrar_acao/$', views.registrar_acao, name='registrar_acao')
+    url('^registrar_acao/$', views.registrar_acao, name='registrar_acao'),
+    url('^gerar_notificacao/$', views.gerar_notificacao, name='gerar_notificacao'),
 ]
