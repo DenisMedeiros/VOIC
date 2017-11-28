@@ -27,4 +27,7 @@ urlpatterns = [
     url('^edicao/$', views.EdicaoView.as_view(), name='edicao'),
     url('^exclusao/$', views.ExclusaoView.as_view(), name='exclusao'),
     url('^historico/$', views.HistoricoView.as_view(), name='historico'),
+    
+    url('^sexo_crianca/$', views.get_sexo_crianca, name='sexo'),
+    url('^registrar_acao/$', views.registrar_acao, name='registrar_acao')
 ]

@@ -14,8 +14,8 @@ SEXO_CHOICES = (
 
 ACAO_CHOICES = (
     ('0', 'Estava com fome'),
-    ('1', 'Estava com sono'),
-    ('2', 'Queria ir ao banheiro'),
+    ('1', 'Queria ir ao banheiro'),
+    ('2', 'Estava com sono'),
     ('3', 'Estava com dor'),
 )
 

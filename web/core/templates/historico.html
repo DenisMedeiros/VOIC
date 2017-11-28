@@ -4,25 +4,7 @@
 {% block "titulo" %} Pagina Inicial {% endblock %}
 
 {% block "css" %}
-    <link href="{% static "/css/dataTables.bootstrap4.min.css" %}" rel="stylesheet">
-    
-    <style>
-        .table-responsive{
-            width: 100% !important;
-        }
-
-        .table {
-            border: 1px solid red;
-            width: 50% !important; /*Importante manter o !important rs */
-            margin: auto;
-        }
-
-        .table-status {
-            margin-top: 20px;
-            margin-bottom: 20px !important;
-        }
-    </style>
-    
+    <link href="{% static "/css/dataTables.bootstrap4.min.css" %}" rel="stylesheet">    
 {% endblock %}
 
 {% block "corpo" %}
@@ -44,28 +26,30 @@
         <br />
         <br />
         
-        <div class="container">
-                <table id="example" class="table-responsive table-striped table-hover">
+        <div class="container bloco-tabela">
+                <table id="tabela" align="center" width="100%">
                         <thead>
                                 <tr>
                                     <th>Ação</th>
                                     <th>Data/Hora</th>
-                                    <th>Gera Notificação</th>
+                                    <th>Gerou Notificação</th>
                                     
                                 </tr>
                             </thead>
                             
                             <tbody>
+                                {% for h in historicos %}
                                 <tr>
-                                    <td>Banheiro</td>
-                                    <td>27/22h</td>
-                                    <td>Sim</td>
+                                    <td>{{ h.get_acao_display }}</td>
+                                    <td>{{ h.data_hora }}h</td>
+                                    <td>{% if h.gerou_notificacao %} Sim {% else %} Não {% endif %} </td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div> 
                    
-                    <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center">
         </div>
       
     </div>
@@ -77,5 +61,32 @@
 
     <script src="{% static "/js/jquery.dataTables.min.js" %}"></script>
     <script src="{% static "/js/dataTables.bootstrap4.min.js" %}"></script>  
+    <script>
+        $(document).ready(function() {
+            $('#tabela').DataTable( {
+                "language": {
+                    "lengthMenu": "Exibir  &nbsp; _MENU_ &nbsp; entradas por página",
+                    "zeroRecords": "Nenhuma entrada encontrada",
+                    "info": "Exibindo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrou do total de _MAX_ entradas)",
+                    "search": "Pesquisar",
+                     "paginate": {
+                        "first":      "Primeira",
+                        "last":       "Última",
+                        "next":       "Próxima",
+                        "previous":   "Anterior"
+                     },
+                    "loadingRecords": "Carregando...",
+                    "processing":    "Processando...",
+                    "aria": {
+                        "sortAscending":  ": Ative para ordenar em forma ascendente",
+                        "sortDescending": ": Ative para ordenar em forma descendente"
+                    }
+                }
+            } );
+        } );  
+        
+    </script>
       
 {% endblock %}
