@@ -63,8 +63,9 @@ class CadastroView(View):
             context['mensagem'] = 'Cadastro realizado com sucesso.'
             return render(request, 'mensagem.html', context)
         else:
-            context['mensagem'] = 'Ocorreu um erro no processamento do formulário.'           
-            return render(request, 'mensagem.html', context)
+            context['crianca_form'] = crianca_form
+            context['responsavel_form'] = responsavel_form
+            return render(request, 'cadastro.html', context)
         
 class EdicaoView(View):
     
@@ -102,8 +103,9 @@ class EdicaoView(View):
             context['mensagem'] = 'Edição realizada com sucesso.'           
             return render(request, 'mensagem.html', context)
         else:
-            context['mensagem'] = 'Ocorreu um erro no processamento do formulário.'           
-            return render(request, 'mensagem.html', context)
+            context['crianca_form'] = crianca_form
+            context['responsavel_form'] = responsavel_form
+            return render(request, 'cadastro.html', context)
 
 
 class ExclusaoView(View):
@@ -182,12 +184,14 @@ def gerar_notificacao(request):
     sistema = Sistema.objects.last()
     if not sistema:
         sistema = Sistema.objects.create()
-    estado = request.GET['estado']
     
-    if estado == u'true':
-        sistema.gerar_notificacao = True
-    else:
-        sistema.gerar_notificacao = False
-    
-    sistema.save()
-    return JsonResponse({})   
+    if 'estado' in request.GET:
+        estado = request.GET['estado']
+        
+        if estado == u'true':
+            sistema.gerar_notificacao = True
+        else:
+            sistema.gerar_notificacao = False
+        sistema.save()
+        
+    return JsonResponse({'gerar_notificacao': sistema.gerar_notificacao})   

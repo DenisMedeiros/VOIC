@@ -25,32 +25,32 @@
                 {% csrf_token %}
                 
                 <div class="form-group">
-                    {{ crianca_form.nome.errors }}
-                    <label for="{{ crianca_form.nome.id_for_label }}" class="control-label">Nome:* </label>
+                    <div class="mensagem-erro"> {{ crianca_form.nome.errors }} </div>
+                    <label for="{{ crianca_form.nome.id_for_label }}" class="control-label">Nome da Criança:* </label>
                     {{ crianca_form.nome }}
                 </div>
 
                 <div class="form-group">
-                    {{ crianca_form.idade.errors }}
-                    <label for="{{ crianca_form.idade.id_for_label }}" class="control-label">Idade:* </label>
+                    <div class="mensagem-erro"> {{ crianca_form.idade.errors }} </div>
+                    <label for="{{ crianca_form.idade.id_for_label }}" class="control-label">Idade da Criança:* </label>
                     {{ crianca_form.idade }}
                 </div>
 
                  <div class="form-group">
-                    {{ crianca_form.sexo.errors }}
-                    <label for="{{ crianca_form.sexo.id_for_label }}" class="control-label">Sexo:* </label>
+                    <div class="mensagem-erro"> {{ crianca_form.sexo.errors }} </div>
+                    <label for="{{ crianca_form.sexo.id_for_label }}" class="control-label">Sexo da Criança:* </label>
                     {{ crianca_form.sexo }}
                 </div>
                 
                  <div class="form-group">
-                    {{ responsavel_form.email.errors }}
-                    <label for="{{ responsavel_form.email.id_for_label }}" class="control-label">Email:* </label>
+                    <div class="mensagem-erro"> {{ responsavel_form.email.errors }} </div>
+                    <label for="{{ responsavel_form.email.id_for_label }}" class="control-label">Email do Responsável:* </label>
                     {{ responsavel_form.email }}
                 </div>  
                 
                 <div class="form-group">
-                    {{ responsavel_form.celular.errors }}
-                    <label for="{{ responsavel_form.celular.id_for_label }}" class="control-label">Celular:* </label>
+                   <div class="mensagem-erro"> {{ responsavel_form.celular.errors }} </div>
+                    <label for="{{ responsavel_form.celular.id_for_label }}" class="control-label">Celular do Responsável:* </label>
                     {{ responsavel_form.celular }}
                 </div>  
 

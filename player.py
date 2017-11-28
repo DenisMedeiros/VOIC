@@ -9,6 +9,10 @@ import string
 from evdev import InputDevice
 from select import select
 
+def enviar_notificacao():
+    print "Enviando notificação."
+    pass
+
 # Configurações
 INTERVALO = 1 # (em segundos)
 URL_SEXO = 'http://127.0.0.1:8000/sexo_crianca/'
@@ -24,9 +28,9 @@ while True:
     r,w,x = select([dev], [], [])
     for event in dev.read():
         if event.type==1 and event.value==1:
-            print "Letra:", KEYS[event.code]
-            print "Event code:", event.code
-            continue
+            #print "Letra:", KEYS[event.code]
+            #print "Event code:", event.code
+            #continue
         
             diferenca = datetime.now() - ultima_acao
             if diferenca.seconds >= INTERVALO:
@@ -42,7 +46,7 @@ while True:
                     continue
                     
                 code = event.code
-                if code i in [1,41,59]
+                if code in (1, 41, 59,):
                     subprocess.Popen(['omxplayer', os.path.join(DIRETORIO_AUDIOS, sexo, 'comer.mp3')])
                     r = requests.get(URL_SALVAR_ACAO, params={'data_hora': ultima_acao, 'acao': 0, 'gerou_notificacao': 0})
                 elif letra == 'b':
@@ -54,7 +58,12 @@ while True:
                 elif letra == 'd':
                     subprocess.Popen(['omxplayer', os.path.join(DIRETORIO_AUDIOS, sexo, 'dor.mp3')]) 
                     r = requests.get(URL_SALVAR_ACAO, params={'data_hora': ultima_acao, 'acao': 3, 'gerou_notificacao': 0}) 
+                    
                 
+                r = requests.get('http://10.9.99.44:8000/gerar_notificacao/')
+                dados = r.json()
+                if dados['gerar_notificacao']:
+                    enviar_notificacao()
                 
 
                 
