@@ -16,12 +16,14 @@
             <div class="row">
                 <div class="col-md-3"></div>
               <div class="col-md-3">
+                <form method="post" action="" data-troggle="validator">
+                    {% csrf_token %}
                     <button type="submit" class="btn btn-primary botao" style="padding-right:40px;padding-left:40px;">SIM</button>
-                    
+                    <input type="hidden" name="resposta" value="sim">
+                </form>
               </div>
             <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary botao" style="padding-right:40px;padding-left:40px;">NÃO</button>
-                    
+                <a href="{% url "pagina_inicial" %}"> <button class="btn btn-primary botao" style="padding-right:40px;padding-left:40px;">NÃO</button></a>
             </div>
             <div class="col-md-3"></div>
         </div>

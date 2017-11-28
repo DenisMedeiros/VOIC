@@ -7,8 +7,9 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">          
-        <h1 class="display-3 text-center"> Cadastro realizado com sucesso! </h1>
+        <h1 class="display-3 text-center"> {{ mensagem }} </h1>
         <p class="text-center"> Você será redirecionando em 5 segundos...</p>
+        <p class="text-center" ><a style="text-decoration:none"  href="{% url "pagina_inicial" %}" > « Voltar </a></p> 
         
       </div>  
     </div>

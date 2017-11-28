@@ -8,8 +8,11 @@
     <div class="jumbotron">
       <div class="container">
         <p class="text-left" ><a style="text-decoration:none"  href="{% url "pagina_inicial" %}" > « Voltar </a></p> 
-
+        {% if novo_cadastro %}
         <h1 class="display-3 text-center" style="width:100%">CADASTRE-SE</h1>
+        {% else %}
+        <h1 class="display-3 text-center" style="width:100%">EDIÇÃO</h1>
+        {% endif %}
         <p class="text-center">Aqui você deve cadastrar os dados da criança e do responsável.</p>
         
         <br />
@@ -18,59 +21,45 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-              <form data-troggle="validator">
-                <div class="form-group">
-                    <label for="textName" class="control-label">Nome*</label>
-                    <input type="text" id="textNome" class="form-control" required="required"  placeholder="">
-                    <small id="emailHelp" class="form-text text-muted">Digite o nome da criança</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="example-number-input">Idade* (anos)</label>
-                    <input type="number" min="0" step="1" pattern="\" class="form-control" required="required" id="replyNumber" placeholder="">
-                </div>
-
-                <br>
+              <form method="post" action="" data-troggle="validator">
+                {% csrf_token %}
                 
-                <fieldset class="form-group">
-                    <legend>Sexo*</legend>
-                    <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" >
-                        Masculino
-                    </label>
-                    </div>
-                    <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Feminino
-                    </label>
-                    </div>
-                </fieldset>
-
                 <div class="form-group">
-                        <label for="exampleInputEmail1">Email do responsável* </label>
-                        <input type="email" class="form-control" style="width:60%"  required="required"  aria-describedby="emailHelp" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted">Digite o email do responsável</small>
+                    {{ crianca_form.nome.errors }}
+                    <label for="{{ crianca_form.nome.id_for_label }}" class="control-label">Nome:* </label>
+                    {{ crianca_form.nome }}
                 </div>
 
-                <br>
-
                 <div class="form-group">
-                        <label for="example-tel-input" >Telefone do responsável*</label>
-                        <input class="form-control" maxlength="15" style="width:60%" name="phone" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" type="tel" required="required" value="" id="example-tel-input" placeholder="(DDD)9XXXX-XXXX">
-                        <small id="emailHelp" class="form-text text-muted">Digite o telefone do responsável</small>
+                    {{ crianca_form.idade.errors }}
+                    <label for="{{ crianca_form.idade.id_for_label }}" class="control-label">Idade:* </label>
+                    {{ crianca_form.idade }}
                 </div>
 
+                 <div class="form-group">
+                    {{ crianca_form.sexo.errors }}
+                    <label for="{{ crianca_form.sexo.id_for_label }}" class="control-label">Sexo:* </label>
+                    {{ crianca_form.sexo }}
+                </div>
+                
+                 <div class="form-group">
+                    {{ responsavel_form.email.errors }}
+                    <label for="{{ responsavel_form.email.id_for_label }}" class="control-label">Email:* </label>
+                    {{ responsavel_form.email }}
+                </div>  
+                
+                <div class="form-group">
+                    {{ responsavel_form.celular.errors }}
+                    <label for="{{ responsavel_form.celular.id_for_label }}" class="control-label">Celular:* </label>
+                    {{ responsavel_form.celular }}
+                </div>  
 
-                <br>
-                <br>
-                <br>
+                <br>        
 
                 <div class="row">
-                        <div class="col-md-12">
-                            <center><button type="submit" class="btn btn-primary botao" style="padding-right:40px;padding-left:40px;">Salvar</button></center>
-                        </div>
+                    <div class="col-md-12">
+                        <center><button type="submit" class="btn btn-primary botao" style="padding-right:40px;padding-left:40px;">Salvar</button></center>
+                    </div>
                   </div>
               </form>
             </div>

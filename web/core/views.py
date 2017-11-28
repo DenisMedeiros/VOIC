@@ -11,71 +11,125 @@ from .models import *
 class PaginaInicialView(View):
 
     def get(self, request):
+        
+        if Crianca.objects.all().count() == 0:
+            existe = False
+        else:
+            existe = True
+        
         context = {
-            'existe': False,
+            'existe': existe,
         }
         return render(request, 'pagina_inicial.html', context)
         
 class CadastroView(View):
         
     def get(self, request):
+        if Crianca.objects.all().count() == 0:
+            
+            crianca_form = CriancaForm()
+            responsavel_form = ResponsavelForm()
 
-        if request.user.is_authenticated():
-            return HttpResponseRedirect("/")
-
-        return render(request, 'cadastro.html', locals())
+            context = {
+                'crianca_form': crianca_form,
+                'responsavel_form': responsavel_form,
+            }
+            
+            return render(request, 'cadastro.html', context)
+        else:
+            context = {
+                'mensagem': 'Já existe um cadastro.',
+                'novo_cadastro': True,
+            }
+            return render(request, 'mensagem.html', context)
 
     def post(self, request):
 
         # Verifique se há algum problema com o form.
-        form = ContaForm(request.POST, request.FILES)
-        erros = form.errors.as_data()
-
-        if not form.is_valid():
-            return render(request, 'cadastro_conta.html', locals())
-
-        # Neste ponto todos os campos obrigatórios estão OK.
-
-        conta = form.save()
-        conta.save()
-
-        # Neste ponto deve ser criada a conta no Samba, LDAP, etc.
-
-        return render(request, 'cadastro_sucesso.html', locals())
+        crianca_form = CriancaForm(request.POST, request.FILES)
+        responsavel_form = ResponsavelForm(request.POST, request.FILES)
+        
+        if crianca_form.is_valid() and responsavel_form.is_valid():
+            crianca = crianca_form.save(commit=False)
+            responsavel = responsavel_form.save(commit=False)
+            
+            crianca.save()
+            responsavel.save()
+            
+            context = {
+                'mensagem': 'Cadastro realizado com sucesso.',
+            }            
+            
+            return render(request, 'mensagem.html', context)
+        else:
+            return None
         
 class EdicaoView(View):
-        
+    
     def get(self, request):
+        
+        if Crianca.objects.count() > 0:
+            
+            crianca = Crianca.objects.last()
+            responsavel = Responsavel.objects.last()
+        
+            crianca_form = CriancaForm(request.POST or None, instance=crianca)
+            responsavel_form = ResponsavelForm(request.POST or None, instance=responsavel)
 
-        if request.user.is_authenticated():
-            return HttpResponseRedirect("/")
-
-        form = ContaForm()
-        return render(request, 'cadastro_conta.html', locals())
+            context = {
+                'crianca_form': crianca_form,
+                'responsavel_form': responsavel_form,
+            }
+            
+            return render(request, 'cadastro.html', context)
+        else:
+            context = {
+                'mensagem': 'Ainda não existe cadastro.'
+            }
+            return render(request, 'mensagem.html', context)
 
     def post(self, request):
 
         # Verifique se há algum problema com o form.
-        form = ContaForm(request.POST, request.FILES)
-        erros = form.errors.as_data()
-
-        if not form.is_valid():
-            return render(request, 'cadastro_conta.html', locals())
-
-        # Neste ponto todos os campos obrigatórios estão OK.
-
-        conta = form.save()
-        conta.save()
-
-        # Neste ponto deve ser criada a conta no Samba, LDAP, etc.
-
-        return render(request, 'cadastro_sucesso.html', locals())
+        crianca_form = CriancaForm(request.POST, request.FILES)
+        responsavel_form = ResponsavelForm(request.POST, request.FILES)
+        
+        if crianca_form.is_valid() and responsavel_form.is_valid():
+            crianca = crianca_form.save(commit=False)
+            responsavel = responsavel_form.save(commit=False)
+            
+            crianca.save()
+            responsavel.save()
+            
+            context = {
+                'mensagem': 'Edição realizada com sucesso.',
+            }            
+            
+            return render(request, 'mensagem.html', context)
+        else:
+            return None
 
 
 class ExclusaoView(View):
     
     def get(self, request):
         return render(request, 'exclusao.html', locals())
+        
+    def post(self, request):
+        if 'resposta' in self.request.POST:
+            resposta = self.request.POST['resposta']
+            if resposta == "sim":
+                Crianca.objects.all().delete()
+                Responsavel.objects.all().delete()
+                Historico.objects.all().delete()
+                
+                context = {
+                    'mensagem': 'Todos os dados foram excluídos.',
+                }            
+            
+            return render(request, 'mensagem.html', context)
+        
+        return Nones
         
 class HistoricoView(View):
     
