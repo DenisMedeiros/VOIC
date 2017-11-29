@@ -34,7 +34,7 @@ while True:
         
             diferenca = datetime.now() - ultima_acao
             if diferenca.seconds >= INTERVALO:
-                r = requests.get('http://10.9.99.44:8000/sexo_crianca/')
+                r = requests.get('http://127.0.0.1:8000/sexo_crianca/')
                 dados = r.json()
   
                 if dados['sexo'] == "M":
@@ -60,7 +60,7 @@ while True:
                     r = requests.get(URL_SALVAR_ACAO, params={'data_hora': ultima_acao, 'acao': 3, 'gerou_notificacao': 0}) 
                     
                 
-                r = requests.get('http://10.9.99.44:8000/gerar_notificacao/')
+                r = requests.get('http://127.0.0.1:8000/gerar_notificacao/')
                 dados = r.json()
                 if dados['gerar_notificacao']:
                     enviar_notificacao()
