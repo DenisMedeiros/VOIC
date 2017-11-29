@@ -41,7 +41,7 @@ class CadastroView(View):
 
             context['crianca_form'] = crianca_form
             context['responsavel_form'] = responsavel_form
-            
+            context['novo_cadastro'] = True
             return render(request, 'cadastro.html', context)
         else:
             context['mensagem'] = 'Já existe um cadastro.'
